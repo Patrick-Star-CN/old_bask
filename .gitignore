@@ -1,6 +1,6 @@
 HELP.md
 target/
-src/main/resources/application.yml
+src/main/resources/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
