@@ -34,6 +34,11 @@ public enum EmBusinessError implements CommonError {
     USER_EXIST(20002, "用户已注册"),
 
     /**
+     * 配置出错
+     */
+    CONFIG_ERROR(30001, "配置出错"),
+
+    /**
      * 未知错误
      */
     UNKNOWN_ERROR(40004, "未知错误")
