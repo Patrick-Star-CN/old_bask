@@ -1,6 +1,5 @@
 HELP.md
 target/
-src/main/resources/application.yml
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -18,6 +17,8 @@ src/main/resources/application.yml
 node_modules/
 package.json
 package-lock.json
+src/main/resources/application.yml
+src/test/
 
 ### IntelliJ IDEA ###
 .idea
