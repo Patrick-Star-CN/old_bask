@@ -1,4 +1,3 @@
-# 工程简介
+# OldBask
 
-# 延伸阅读
-
+一个用Spring + Spring MVC + Mybatis Plus框架实现的微信小程序服务端。

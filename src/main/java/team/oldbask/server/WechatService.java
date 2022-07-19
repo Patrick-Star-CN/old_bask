@@ -1,11 +1,13 @@
 package team.oldbask.server;
 
+import org.springframework.stereotype.Service;
 import team.oldbask.domain.Code2Session;
 
 /**
  * @author Patrick_Star
  * @version 1.0
  */
+@Service
 public interface WechatService {
 
     /**

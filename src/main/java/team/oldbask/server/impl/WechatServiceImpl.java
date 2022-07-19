@@ -2,6 +2,7 @@ package team.oldbask.server.impl;
 
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import team.oldbask.config.WechatProperties;
 import team.oldbask.domain.Code2Session;
@@ -12,6 +13,7 @@ import team.oldbask.util.CommonUtil;
  * @author Patrick_Star
  * @version 1.0
  */
+@Service
 public class WechatServiceImpl implements WechatService {
 
     @Override
