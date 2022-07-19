@@ -1,7 +1,6 @@
 package team.oldbask.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -14,6 +13,14 @@ import team.oldbask.handle.RedisSessionInterceptor;
 @Configuration
 public class WebSecurityConfig implements WebMvcConfigurer {
 
+    /**
+     * 不需要进行session检测的接口过滤常量
+     */
+    private final String[] IGNORE_URI = {"/user/wechat/register", "/user/wechat/login"};
+
+    /**
+     * redis储存方案的session拦截器
+     */
     @Autowired
     RedisSessionInterceptor redisSessionInterceptor;
 
@@ -21,8 +28,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(redisSessionInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/wechat/register")
-                .excludePathPatterns("/user/wechat/login");
+                .excludePathPatterns(IGNORE_URI);
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }

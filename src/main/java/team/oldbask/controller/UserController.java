@@ -16,6 +16,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 微信登录接口
+     * @param code 参数形式传入的用户code
+     * @return json数据，包含状态码和状态信息
+     * @throws TransactionException openid错误
+     */
     @ResponseBody
     @GetMapping("/wechat/login")
     public RespJson loginByWechat(@RequestParam(value = "code") String code) throws TransactionException {

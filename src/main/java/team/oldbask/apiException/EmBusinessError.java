@@ -48,7 +48,13 @@ public enum EmBusinessError implements CommonError {
     UNKNOWN_ERROR(40004, "未知错误")
     ;
 
+    /**
+     * 异常编码
+     */
     private int errCode;
+    /**
+     * 异常消息
+     */
     private String errMsg;
 
     EmBusinessError(int errCode, String errMsg ) {

@@ -17,6 +17,8 @@ public interface UserDao extends BaseMapper<User> {
      * @param openId openid
      * @return 用户信息
      */
-    @Select("SELECT * FROM tbl_user WHERE openid = #{openId}")
+    @Select("SELECT * " +
+            "FROM tbl_user " +
+            "WHERE openid = #{openId}")
     User selectByOpenId(String openId);
 }
