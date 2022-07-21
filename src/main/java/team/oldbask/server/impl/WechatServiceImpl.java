@@ -38,8 +38,6 @@ public class WechatServiceImpl implements WechatService {
             code2Session.setErrMsg("code 无效");
         } else if (CommonUtil.IntegerEqual(code2Session.getErrCode(), 45011)) {
             code2Session.setErrMsg("频率限制，每个用户每分钟100次");
-        } else {
-            code2Session.setErrMsg("其他错误");
         }
         return code2Session;
     }

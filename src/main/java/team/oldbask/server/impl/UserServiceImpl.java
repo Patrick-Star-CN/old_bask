@@ -7,10 +7,10 @@ import team.oldbask.apiException.TransactionException;
 import team.oldbask.dao.UserDao;
 import team.oldbask.domain.Code2Session;
 import team.oldbask.domain.User;
+import team.oldbask.domain.UserInfoForm;
 import team.oldbask.domain.UserPostForm;
 import team.oldbask.server.UserService;
 import team.oldbask.server.WechatService;
-import team.oldbask.util.CommonUtil;
 
 /**
  * @author Patrick_Star
@@ -27,37 +27,52 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Boolean loginByWechat(String code) throws TransactionException {
+    public Integer loginByWechat(String code) throws TransactionException {
         Code2Session session = wechatService.code2Session(code);
-        if (!CommonUtil.IntegerEqual(session.getErrCode(), 0)) {
+        if (session.getErrCode() != null) {
             throw new TransactionException(EmBusinessError.OPENID_ERROR);
         }
 
         User user = userDao.selectByOpenId(session.getOpenId());
-        return user != null;
+        if (user == null) {
+            return null;
+        }
+        return user.getId();
     }
 
     @Override
-    public Boolean registerByWechat(UserPostForm userPostForm) throws TransactionException {
+    public User getUserInfo(String uid) {
+        return userDao.selectById(Integer.parseInt(uid));
+    }
+
+    @Override
+    public Integer registerByWechat(UserPostForm userPostForm) throws TransactionException {
         Code2Session session = wechatService.code2Session(userPostForm.getCode());
-        if (!CommonUtil.IntegerEqual(session.getErrCode(), 0)) {
+        if (session.getErrCode() != null) {
             throw new TransactionException(EmBusinessError.OPENID_ERROR);
         }
-
-        User user = userDao.selectByOpenId(session.getOpenId());
-        if (user != null) {
-            return false;
+        if (userDao.selectByOpenId(session.getOpenId()) != null) {
+            return null;
         }
 
-        int i = userDao.insert(new User(
-                userPostForm.getUsername(),
-                userPostForm.getPassword(),
-                userPostForm.getPhoneNum(),
-                userPostForm.getSex(),
-                userPostForm.getAge(),
-                session.getOpenId()
+        userDao.insert(new User(
+            userPostForm.getUsername(),
+            session.getOpenId()
         ));
+        return userDao.selectByOpenId(session.getOpenId()).getId();
+    }
 
-        return i == 1;
+    @Override
+    public Boolean submitUserInfo(UserInfoForm userInfoForm, String uid) {
+        User user = userDao.selectById(Integer.parseInt(uid));
+        return userDao.updateById(new User(
+                Integer.parseInt(uid),
+                userInfoForm.getUsername(),
+                userInfoForm.getPhoneNum(),
+                userInfoForm.getSex(),
+                userInfoForm.getAge(),
+                user.getType(),
+                user.getOpenid()
+        )) == 1;
     }
 }

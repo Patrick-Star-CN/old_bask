@@ -7,6 +7,10 @@ package team.oldbask.util;
  */
 public class CommonUtil {
     public static boolean IntegerEqual(Integer left, Integer right) {
-        return right.intValue() == left.intValue();
+        if (right != null && left != null) {
+            return right.intValue() == left.intValue();
+        } else {
+            return false;
+        }
     }
 }

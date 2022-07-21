@@ -1,12 +1,9 @@
 package team.oldbask.handle;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.session.web.socket.server.SessionRepositoryMessageInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import team.oldbask.apiException.EmBusinessError;
 import team.oldbask.apiException.TransactionException;
 

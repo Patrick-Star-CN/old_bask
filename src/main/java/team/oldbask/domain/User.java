@@ -27,16 +27,24 @@ public class User {
 
     private Integer id;
     private String username;
-    private String password;
     private String phoneNum;
     private String sex;
     private Integer age;
     private UserType type;
     private String openid;
 
-    public User(String username, String password, String phoneNum, String sex, Integer age, String openid) {
+    public User(Integer id, String username, String phoneNum, String sex, Integer age, UserType type, String openid) {
+        this.id = id;
         this.username = username;
-        this.password = password;
+        this.phoneNum = phoneNum;
+        this.sex = sex;
+        this.age = age;
+        this.type = type;
+        this.openid = openid;
+    }
+
+    public User(String username, String phoneNum, String sex, Integer age, String openid) {
+        this.username = username;
         this.phoneNum = phoneNum;
         this.sex = sex;
         this.age = age;
@@ -44,7 +52,11 @@ public class User {
         this.openid = openid;
     }
 
+    public User(String username, String openid) {
+        this.username = username;
+        this.openid = openid;
+    }
+
     public User() {
     }
 }
-
