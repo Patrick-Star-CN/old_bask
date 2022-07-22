@@ -57,22 +57,24 @@ public class UserServiceImpl implements UserService {
 
         userDao.insert(new User(
             userPostForm.getUsername(),
-            session.getOpenId()
+            session.getOpenId(),
+            userPostForm.getProfile()
         ));
         return userDao.selectByOpenId(session.getOpenId()).getId();
     }
 
     @Override
-    public Boolean submitUserInfo(UserInfoForm userInfoForm, String uid) {
+    public void submitUserInfo(UserInfoForm userInfoForm, String uid) {
         User user = userDao.selectById(Integer.parseInt(uid));
-        return userDao.updateById(new User(
+        userDao.updateById(new User(
                 Integer.parseInt(uid),
                 userInfoForm.getUsername(),
                 userInfoForm.getPhoneNum(),
                 userInfoForm.getSex(),
                 userInfoForm.getAge(),
                 user.getType(),
-                user.getOpenid()
-        )) == 1;
+                user.getOpenid(),
+                userInfoForm.getProfile()
+        ));
     }
 }

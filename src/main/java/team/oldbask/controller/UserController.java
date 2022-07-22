@@ -1,5 +1,6 @@
 package team.oldbask.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,11 @@ import team.oldbask.util.RespJson;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author Patrick_Star
+ * @version 1.0
+ */
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -43,8 +49,11 @@ public class UserController {
         if (uid != null) {
             session.setAttribute("id", uid.toString());
             redisTemplate.opsForValue().set("id:" + uid, session.getId());
+            log.info("login-200-OK");
             return new RespJson(200, "OK");
         } else {
+            log.info("login-" + EmBusinessError.USER_NOT_EXIST.getErrorCode()
+                     + "-" + EmBusinessError.USER_NOT_EXIST.getErrorMsg());
             return new RespJson(EmBusinessError.USER_NOT_EXIST.getErrorCode(),
                                 EmBusinessError.USER_NOT_EXIST.getErrorMsg());
         }
@@ -58,8 +67,11 @@ public class UserController {
         if (uid != null) {
             session.setAttribute("id", uid.toString());
             redisTemplate.opsForValue().set("id:" + uid, session.getId());
+            log.info("register-200-OK");
             return new RespJson(200, "OK");
         } else {
+            log.info("register-" + EmBusinessError.USER_EXIST.getErrorCode()
+                    + "-" + EmBusinessError.USER_EXIST.getErrorMsg());
             return new RespJson(EmBusinessError.USER_EXIST.getErrorCode(),
                                 EmBusinessError.USER_EXIST.getErrorMsg());
         }
@@ -70,8 +82,11 @@ public class UserController {
     public RespJson submitDisease(@RequestBody DiseasePostForm diseasePostForm, HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         if (diseaseService.submitDisease(diseasePostForm, uid)) {
+            log.info("submitDisease-200-OK");
             return new RespJson(200, "OK");
         } else {
+            log.info("submitDisease-" + EmBusinessError.USER_NOT_EXIST.getErrorCode()
+                     + "-" + EmBusinessError.USER_NOT_EXIST.getErrorMsg());
             return new RespJson(EmBusinessError.USER_NOT_EXIST.getErrorCode(),
                                 EmBusinessError.USER_NOT_EXIST.getErrorMsg());
         }
@@ -81,6 +96,7 @@ public class UserController {
     @GetMapping("/info")
     public RespJson getUserInfo(HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
+        log.info("info-200-OK");
         return new RespJson(200, "OK", userService.getUserInfo(uid));
     }
 
@@ -89,6 +105,7 @@ public class UserController {
     public RespJson submitUserInfo(@RequestBody UserInfoForm userInfoForm, HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         userService.submitUserInfo(userInfoForm, uid);
+        log.info("submitInfo-200-OK");
         return new RespJson(200, "OK");
     }
 }

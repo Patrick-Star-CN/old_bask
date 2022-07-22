@@ -42,5 +42,5 @@ public interface UserService {
      * @param uid uid
      * @return true: 保存成功; false: 保存失败
      */
-    Boolean submitUserInfo(UserInfoForm userInfoForm, String uid);
+    void submitUserInfo(UserInfoForm userInfoForm, String uid);
 }

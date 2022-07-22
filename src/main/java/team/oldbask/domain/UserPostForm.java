@@ -11,4 +11,5 @@ import lombok.Data;
 public class UserPostForm {
     private String username;
     private String code;
+    private String profile;
 }

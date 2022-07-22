@@ -12,4 +12,5 @@ public class UserInfoForm {
     private String phoneNum;
     private String sex;
     private Integer age;
+    private String profile;
 }
