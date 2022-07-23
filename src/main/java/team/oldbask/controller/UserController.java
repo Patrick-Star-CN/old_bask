@@ -93,6 +93,14 @@ public class UserController {
     }
 
     @ResponseBody
+    @GetMapping("/getDisease")
+    private RespJson getDisease(HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
+        log.info("getDisease-200-OK");
+        return new RespJson(200, "OK", diseaseService.getDisease(uid));
+    }
+
+    @ResponseBody
     @GetMapping("/info")
     public RespJson getUserInfo(HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");

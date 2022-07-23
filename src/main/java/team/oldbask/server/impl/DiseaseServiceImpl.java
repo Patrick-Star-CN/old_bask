@@ -57,6 +57,6 @@ public class DiseaseServiceImpl implements DiseaseService {
 
     @Override
     public Disease getDisease(String uid) {
-        return null;
+        return diseaseDao.selectByUid(Integer.parseInt(uid));
     }
 }

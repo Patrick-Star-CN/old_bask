@@ -60,7 +60,4 @@ public class PersonalTaste {
         this.wheatAllergy = wheatAllergy;
         this.peanutAllergy = peanutAllergy;
     }
-
-    public PersonalTaste() {
-    }
 }

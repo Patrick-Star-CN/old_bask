@@ -36,7 +36,4 @@ public class Disease {
         this.diabetes = diabetes;
         this.gout = gout;
     }
-
-    public Disease() {
-    }
 }

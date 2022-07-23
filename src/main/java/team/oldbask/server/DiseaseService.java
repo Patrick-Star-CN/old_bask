@@ -15,7 +15,7 @@ public interface DiseaseService {
      * 保存用户疾病信息
      * @param diseasePostForm 用户疾病信息
      * @param uid 用户id
-     * @return 1: 保存成功; 2: 保存失败
+     * @return true: 保存成功; false: 保存失败
      */
     Boolean submitDisease(DiseasePostForm diseasePostForm, String uid);
 
