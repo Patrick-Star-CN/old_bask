@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
 import team.oldbask.apiException.TransactionException;
-import team.oldbask.domain.DiseasePostForm;
-import team.oldbask.domain.UserInfoForm;
-import team.oldbask.domain.UserPostForm;
+import team.oldbask.domain.*;
 import team.oldbask.server.DiseaseService;
+import team.oldbask.server.HealthService;
+import team.oldbask.server.PersonalTasteServer;
 import team.oldbask.server.UserService;
 import team.oldbask.util.RespJson;
 
@@ -31,6 +31,12 @@ public class UserController {
 
     @Autowired
     private DiseaseService diseaseService;
+
+    @Autowired
+    private PersonalTasteServer personalTasteServer;
+
+    @Autowired
+    private HealthService healthService;
 
     @Autowired
     private StringRedisTemplate redisTemplate;
@@ -98,6 +104,52 @@ public class UserController {
         String uid = (String)request.getSession().getAttribute("id");
         log.info("getDisease-200-OK");
         return new RespJson(200, "OK", diseaseService.getDisease(uid));
+    }
+
+    @ResponseBody
+    @PostMapping("/submitPersonalTaste")
+    public RespJson submitPersonalTaste(@RequestBody PersonalTastePostForm personalTastePostForm, HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
+        if (personalTasteServer.submitPersonalTaste(personalTastePostForm, uid)) {
+            log.info("submitPersonalTaste-200-OK");
+            return new RespJson(200, "OK");
+        } else {
+            log.info("submitPersonalTaste-" + EmBusinessError.USER_NOT_EXIST.getErrorCode()
+                    + "-" + EmBusinessError.USER_NOT_EXIST.getErrorMsg());
+            return new RespJson(EmBusinessError.USER_NOT_EXIST.getErrorCode(),
+                    EmBusinessError.USER_NOT_EXIST.getErrorMsg());
+        }
+    }
+
+    @ResponseBody
+    @GetMapping("/getPersonalTaste")
+    public RespJson getPersonalTaste(HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
+        log.info("getPersonalTaste-200-OK");
+        return new RespJson(200, "OK", personalTasteServer.getPersonalTaste(uid));
+    }
+
+    @ResponseBody
+    @PostMapping("/submitHealth")
+    public RespJson submitHealth(@RequestBody HealthPostForm healthPostForm, HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
+        if (healthService.submitHealth(healthPostForm, uid)) {
+            log.info("submitHealth-200-OK");
+            return new RespJson(200, "OK");
+        } else {
+            log.info("submitHealth-" + EmBusinessError.USER_NOT_EXIST.getErrorCode()
+                    + "-" + EmBusinessError.USER_NOT_EXIST.getErrorMsg());
+            return new RespJson(EmBusinessError.USER_NOT_EXIST.getErrorCode(),
+                    EmBusinessError.USER_NOT_EXIST.getErrorMsg());
+        }
+    }
+
+    @ResponseBody
+    @GetMapping("/getHealth")
+    public RespJson getHealth(HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
+        log.info("getHealth-200-OK");
+        return new RespJson(200, "OK", healthService.getHealth(uid));
     }
 
     @ResponseBody

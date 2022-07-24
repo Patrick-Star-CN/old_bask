@@ -1,6 +1,7 @@
 package team.oldbask.server.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import team.oldbask.dao.PersonalTasteDao;
 import team.oldbask.dao.UserDao;
 import team.oldbask.domain.PersonalTaste;
@@ -11,6 +12,7 @@ import team.oldbask.server.PersonalTasteServer;
  * @author Patrick_Star
  * @version 1.0
  */
+@Service
 public class PersonalTasteServerImpl implements PersonalTasteServer {
 
     @Autowired

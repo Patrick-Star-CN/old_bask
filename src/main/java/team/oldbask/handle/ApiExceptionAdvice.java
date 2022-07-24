@@ -1,5 +1,6 @@
 package team.oldbask.handle;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +13,7 @@ import team.oldbask.util.RespJson;
  * @version 1.0
  */
 @ControllerAdvice
+@Slf4j
 public class ApiExceptionAdvice {
 
     @ResponseBody
@@ -22,7 +24,7 @@ public class ApiExceptionAdvice {
             return new RespJson(businessException.getErrorCode(), businessException.getErrorMsg());
         }
         else {
-            ex.printStackTrace();
+            log.error(ex.getMessage(), ex);
             return new RespJson(EmBusinessError.UNKNOWN_ERROR.getErrorCode(), EmBusinessError.UNKNOWN_ERROR.getErrorMsg());
         }
     }

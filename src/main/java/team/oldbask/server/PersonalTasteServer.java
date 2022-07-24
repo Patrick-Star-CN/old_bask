@@ -1,5 +1,6 @@
 package team.oldbask.server;
 
+import org.springframework.stereotype.Service;
 import team.oldbask.domain.PersonalTaste;
 import team.oldbask.domain.PersonalTastePostForm;
 
@@ -7,6 +8,7 @@ import team.oldbask.domain.PersonalTastePostForm;
  * @author Patrick_Star
  * @version 1.0
  */
+@Service
 public interface PersonalTasteServer {
 
     /**

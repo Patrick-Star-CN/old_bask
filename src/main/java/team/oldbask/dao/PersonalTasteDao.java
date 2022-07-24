@@ -16,7 +16,7 @@ public interface PersonalTasteDao extends BaseMapper<PersonalTaste> {
     /**
      * 通过uid来关系个人口味表
      * @param personalTaste 更新了数据后的实体类对象
-     * @return 1: 更新成功; 2: 更新失败
+     * @return 1: 更新成功; other: 更新失败
      */
     @Update("UPDATE tbl_personal_taste " +
             "SET sour = #{sour}, sweet = #{sweet}, bitterness = #{bitterness}, spicy = #{spicy}, " +
