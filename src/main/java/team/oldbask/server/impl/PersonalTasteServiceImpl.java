@@ -6,14 +6,14 @@ import team.oldbask.dao.PersonalTasteDao;
 import team.oldbask.dao.UserDao;
 import team.oldbask.domain.PersonalTaste;
 import team.oldbask.domain.PersonalTastePostForm;
-import team.oldbask.server.PersonalTasteServer;
+import team.oldbask.server.PersonalTasteService;
 
 /**
  * @author Patrick_Star
  * @version 1.0
  */
 @Service
-public class PersonalTasteServerImpl implements PersonalTasteServer {
+public class PersonalTasteServiceImpl implements PersonalTasteService {
 
     @Autowired
     PersonalTasteDao personalTasteDao;

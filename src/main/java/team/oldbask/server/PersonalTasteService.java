@@ -9,7 +9,7 @@ import team.oldbask.domain.PersonalTastePostForm;
  * @version 1.0
  */
 @Service
-public interface PersonalTasteServer {
+public interface PersonalTasteService {
 
     /**
      * 保存用户个人喜好信息

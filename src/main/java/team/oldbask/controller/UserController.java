@@ -1,6 +1,8 @@
 package team.oldbask.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,7 @@ import team.oldbask.apiException.TransactionException;
 import team.oldbask.domain.*;
 import team.oldbask.server.DiseaseService;
 import team.oldbask.server.HealthService;
-import team.oldbask.server.PersonalTasteServer;
+import team.oldbask.server.PersonalTasteService;
 import team.oldbask.server.UserService;
 import team.oldbask.util.RespJson;
 
@@ -33,7 +35,7 @@ public class UserController {
     private DiseaseService diseaseService;
 
     @Autowired
-    private PersonalTasteServer personalTasteServer;
+    private PersonalTasteService personalTasteService;
 
     @Autowired
     private HealthService healthService;
@@ -49,7 +51,7 @@ public class UserController {
      */
     @ResponseBody
     @GetMapping("/wechat/login")
-    public RespJson loginByWechat(@RequestParam(value = "code") String code, HttpServletRequest request) throws TransactionException {
+    public RespJson loginByWechat(@RequestParam(value = "code") String code, @NotNull HttpServletRequest request) throws TransactionException {
         HttpSession session = request.getSession();
         Integer uid = userService.loginByWechat(code);
         if (uid != null) {
@@ -67,7 +69,7 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/wechat/register")
-    public RespJson registerByWechat(@RequestBody UserPostForm userPostForm, HttpServletRequest request) throws TransactionException {
+    public RespJson registerByWechat(@RequestBody UserPostForm userPostForm, @NotNull HttpServletRequest request) throws TransactionException {
         HttpSession session = request.getSession();
         Integer uid = userService.registerByWechat(userPostForm);
         if (uid != null) {
@@ -85,7 +87,7 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/submitDisease")
-    public RespJson submitDisease(@RequestBody DiseasePostForm diseasePostForm, HttpServletRequest request) {
+    public RespJson submitDisease(@RequestBody DiseasePostForm diseasePostForm, @NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         if (diseaseService.submitDisease(diseasePostForm, uid)) {
             log.info("submitDisease-200-OK");
@@ -98,9 +100,10 @@ public class UserController {
         }
     }
 
+    @Contract("_ -> new")
     @ResponseBody
     @GetMapping("/getDisease")
-    private RespJson getDisease(HttpServletRequest request) {
+    private @NotNull RespJson getDisease(@NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         log.info("getDisease-200-OK");
         return new RespJson(200, "OK", diseaseService.getDisease(uid));
@@ -108,9 +111,9 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/submitPersonalTaste")
-    public RespJson submitPersonalTaste(@RequestBody PersonalTastePostForm personalTastePostForm, HttpServletRequest request) {
+    public RespJson submitPersonalTaste(@RequestBody PersonalTastePostForm personalTastePostForm, @NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
-        if (personalTasteServer.submitPersonalTaste(personalTastePostForm, uid)) {
+        if (personalTasteService.submitPersonalTaste(personalTastePostForm, uid)) {
             log.info("submitPersonalTaste-200-OK");
             return new RespJson(200, "OK");
         } else {
@@ -123,15 +126,15 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/getPersonalTaste")
-    public RespJson getPersonalTaste(HttpServletRequest request) {
+    public RespJson getPersonalTaste(@NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         log.info("getPersonalTaste-200-OK");
-        return new RespJson(200, "OK", personalTasteServer.getPersonalTaste(uid));
+        return new RespJson(200, "OK", personalTasteService.getPersonalTaste(uid));
     }
 
     @ResponseBody
     @PostMapping("/submitHealth")
-    public RespJson submitHealth(@RequestBody HealthPostForm healthPostForm, HttpServletRequest request) {
+    public RespJson submitHealth(@RequestBody HealthPostForm healthPostForm, @NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         if (healthService.submitHealth(healthPostForm, uid)) {
             log.info("submitHealth-200-OK");
@@ -146,7 +149,7 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/getHealth")
-    public RespJson getHealth(HttpServletRequest request) {
+    public RespJson getHealth(@NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         log.info("getHealth-200-OK");
         return new RespJson(200, "OK", healthService.getHealth(uid));
@@ -154,7 +157,7 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/info")
-    public RespJson getUserInfo(HttpServletRequest request) {
+    public RespJson getUserInfo(@NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         log.info("info-200-OK");
         return new RespJson(200, "OK", userService.getUserInfo(uid));
@@ -162,7 +165,7 @@ public class UserController {
 
     @ResponseBody
     @PostMapping("/submitInfo")
-    public RespJson submitUserInfo(@RequestBody UserInfoForm userInfoForm, HttpServletRequest request) {
+    public RespJson submitUserInfo(@RequestBody UserInfoForm userInfoForm, @NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         userService.submitUserInfo(userInfoForm, uid);
         log.info("submitInfo-200-OK");

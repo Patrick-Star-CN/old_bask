@@ -1,5 +1,6 @@
 package team.oldbask.server.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.oldbask.apiException.EmBusinessError;
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer registerByWechat(UserPostForm userPostForm) throws TransactionException {
+    public Integer registerByWechat(@NotNull UserPostForm userPostForm) throws TransactionException {
         Code2Session session = wechatService.code2Session(userPostForm.getCode());
         if (session.getErrCode() != null) {
             throw new TransactionException(EmBusinessError.OPENID_ERROR);
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void submitUserInfo(UserInfoForm userInfoForm, String uid) {
+    public void submitUserInfo(@NotNull UserInfoForm userInfoForm, String uid) {
         User user = userDao.selectById(Integer.parseInt(uid));
         userDao.updateById(new User(
                 Integer.parseInt(uid),
