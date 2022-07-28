@@ -1,21 +1,19 @@
 package team.oldbask.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
+import team.oldbask.domain.Post;
 import team.oldbask.domain.PostForm;
 import team.oldbask.server.PostService;
-import team.oldbask.server.UserService;
 import team.oldbask.util.RespJson;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author Patrick_Star
@@ -43,5 +41,11 @@ public class PostController {
             return new RespJson(EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode(),
                     EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorMsg());
         }
+    }
+
+    @ResponseBody
+    @GetMapping
+    public RespJson getPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
+        return new RespJson(200, "OK", postService.getPost(pageNum, size));
     }
 }

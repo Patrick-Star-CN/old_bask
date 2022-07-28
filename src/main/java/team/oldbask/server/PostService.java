@@ -1,8 +1,10 @@
 package team.oldbask.server;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.stereotype.Service;
+import team.oldbask.domain.Post;
 import team.oldbask.domain.PostForm;
+import team.oldbask.domain.PostPage;
 
 /**
  * @author Patrick_Star
@@ -19,4 +21,12 @@ public interface PostService {
      * @return 1: 保存成功; 2: 保存失败
      */
     boolean submitPost(PostForm postForm, String uid);
+
+    /**
+     * 获取分页的帖子数据
+     * @param pageNum 当前页码
+     * @param numPerPage 每页数量
+     * @return Page对象
+     */
+    PostPage getPost(Integer pageNum, Integer numPerPage);
 }

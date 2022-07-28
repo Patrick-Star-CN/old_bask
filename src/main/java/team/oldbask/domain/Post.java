@@ -19,7 +19,7 @@ public class Post {
     public Post(Integer publisher, String content) {
         this.publisherId = publisher;
         this.content = content;
-        this.createTime = new Timestamp(System.currentTimeMillis());
+        this.createTime = new Timestamp(System.currentTimeMillis() + 28800000);
         this.likeNum = 0;
         this.commentNum = 0;
     }
