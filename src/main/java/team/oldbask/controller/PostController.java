@@ -1,14 +1,11 @@
 package team.oldbask.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
-import team.oldbask.domain.Post;
 import team.oldbask.domain.PostForm;
 import team.oldbask.server.PostService;
 import team.oldbask.util.RespJson;
@@ -46,6 +43,7 @@ public class PostController {
     @ResponseBody
     @GetMapping
     public RespJson getPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
+        log.info("getPost-200-OK");
         return new RespJson(200, "OK", postService.getPost(pageNum, size));
     }
 }

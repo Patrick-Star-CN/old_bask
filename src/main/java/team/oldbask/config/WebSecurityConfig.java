@@ -16,7 +16,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     /**
      * 不需要进行session检测的接口过滤常量
      */
-    private final String[] IGNORE_URI = {"/user/wechat/register", "/user/wechat/login", "/user/test/session"};
+    private final String[] IGNORE_URI = {"/user/wechat/register", "/user/wechat/login"};
 
     /**
      * redis储存方案的session拦截器

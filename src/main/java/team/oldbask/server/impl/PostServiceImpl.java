@@ -10,6 +10,9 @@ import team.oldbask.dao.UserDao;
 import team.oldbask.domain.*;
 import team.oldbask.server.PostService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Patrick_Star
  * @version 1.0
@@ -38,9 +41,11 @@ public class PostServiceImpl implements PostService {
         PostPage postPage = new PostPage();
         postPage.setTotal((int)page.getTotal());
         postPage.setTotalPage((int)page.getPages());
+
+        List<PostWithUser> list = new ArrayList<>();
         for(Post post : page.getRecords()) {
             User publisher = userDao.selectById(post.getPublisherId());
-            postPage.getData().add(new PostWithUser(
+            list.add(new PostWithUser(
                     publisher.getUsername(),
                     publisher.getType().toString(),
                     publisher.getProfile(),
@@ -50,6 +55,7 @@ public class PostServiceImpl implements PostService {
                     post.getCommentNum()
             ));
         }
+        postPage.setData(list);
         return postPage;
     }
 }

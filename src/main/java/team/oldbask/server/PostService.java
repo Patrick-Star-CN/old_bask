@@ -1,8 +1,6 @@
 package team.oldbask.server;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.stereotype.Service;
-import team.oldbask.domain.Post;
 import team.oldbask.domain.PostForm;
 import team.oldbask.domain.PostPage;
 
