@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import team.oldbask.dao.PostDao;
 import team.oldbask.dao.UserDao;
 import team.oldbask.domain.*;
+import team.oldbask.domain.form.PostForm;
+import team.oldbask.domain.model.Post;
+import team.oldbask.domain.model.User;
 import team.oldbask.server.PostService;
 
 import java.util.ArrayList;
@@ -46,6 +49,8 @@ public class PostServiceImpl implements PostService {
         for(Post post : page.getRecords()) {
             User publisher = userDao.selectById(post.getPublisherId());
             list.add(new PostWithUser(
+                    post.getId(),
+                    publisher.getId(),
                     publisher.getUsername(),
                     publisher.getType().toString(),
                     publisher.getProfile(),

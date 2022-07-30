@@ -1,8 +1,8 @@
 package team.oldbask.server;
 
 import org.springframework.stereotype.Service;
-import team.oldbask.domain.PersonalTaste;
-import team.oldbask.domain.PersonalTastePostForm;
+import team.oldbask.domain.model.PersonalTaste;
+import team.oldbask.domain.form.PersonalTasteForm;
 
 /**
  * @author Patrick_Star
@@ -17,7 +17,7 @@ public interface PersonalTasteService {
      * @param uid uid
      * @return true: 保存成功; false: 保存失败
      */
-    boolean submitPersonalTaste(PersonalTastePostForm personalTastePostForm, String uid);
+    boolean submitPersonalTaste(PersonalTasteForm personalTastePostForm, String uid);
 
     /**
      * 通过uid获取该用户个人喜好信息

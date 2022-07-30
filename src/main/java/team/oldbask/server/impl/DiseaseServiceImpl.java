@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.oldbask.dao.DiseaseDao;
 import team.oldbask.dao.UserDao;
-import team.oldbask.domain.Disease;
-import team.oldbask.domain.DiseasePostForm;
+import team.oldbask.domain.model.Disease;
+import team.oldbask.domain.form.DiseaseForm;
 import team.oldbask.server.DiseaseService;
 
 /**
@@ -22,7 +22,7 @@ public class DiseaseServiceImpl implements DiseaseService {
     private UserDao userDao;
 
     @Override
-    public Boolean submitDisease(DiseasePostForm diseasePostForm, String uid) {
+    public Boolean submitDisease(DiseaseForm diseasePostForm, String uid) {
         if (userDao.selectById(uid) == null) {
             return false;
         }

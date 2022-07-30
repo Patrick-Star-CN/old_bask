@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import team.oldbask.domain.Disease;
+import team.oldbask.domain.model.Disease;
 
 /**
  * @author Patrick_Star

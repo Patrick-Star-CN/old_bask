@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.oldbask.dao.HealthDao;
 import team.oldbask.dao.UserDao;
-import team.oldbask.domain.Health;
-import team.oldbask.domain.HealthPostForm;
-import team.oldbask.domain.PersonalTaste;
+import team.oldbask.domain.model.Health;
+import team.oldbask.domain.form.HealthForm;
 import team.oldbask.server.HealthService;
 
 /**
@@ -23,7 +22,7 @@ public class HealthServiceImpl implements HealthService {
     private HealthDao healthDao;
 
     @Override
-    public boolean submitHealth(HealthPostForm healthPostForm, String uid) {
+    public boolean submitHealth(HealthForm healthPostForm, String uid) {
         if (userDao.selectById(uid) == null) {
             return false;
         }

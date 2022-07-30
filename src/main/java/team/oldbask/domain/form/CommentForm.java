@@ -1,4 +1,4 @@
-package team.oldbask.domain;
+package team.oldbask.domain.form;
 
 import lombok.Data;
 
@@ -7,6 +7,7 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-public class PostForm {
+public class CommentForm {
+    private Integer postId;
     private String content;
 }

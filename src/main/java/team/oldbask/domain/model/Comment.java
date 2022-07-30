@@ -1,26 +1,28 @@
-package team.oldbask.domain;
+package team.oldbask.domain.model;
 
 import lombok.Data;
+
 import java.sql.Timestamp;
 
 /**
  * @author Patrick_Star
  * @version 1.0
  */
+
 @Data
-public class Post {
+public class Comment {
     private Integer id;
+    private Integer postId;
     private Integer publisherId;
     private String content;
     private Timestamp createTime;
     private Integer likeNum;
-    private Integer commentNum;
 
-    public Post(Integer publisher, String content) {
-        this.publisherId = publisher;
+    public Comment(Integer postId, Integer publisherId, String content) {
+        this.postId = postId;
+        this.publisherId = publisherId;
         this.content = content;
         this.createTime = new Timestamp(System.currentTimeMillis() + 28800000);
         this.likeNum = 0;
-        this.commentNum = 0;
     }
 }

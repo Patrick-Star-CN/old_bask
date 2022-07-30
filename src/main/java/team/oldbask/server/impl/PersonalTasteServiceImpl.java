@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.oldbask.dao.PersonalTasteDao;
 import team.oldbask.dao.UserDao;
-import team.oldbask.domain.PersonalTaste;
-import team.oldbask.domain.PersonalTastePostForm;
+import team.oldbask.domain.model.PersonalTaste;
+import team.oldbask.domain.form.PersonalTasteForm;
 import team.oldbask.server.PersonalTasteService;
 
 /**
@@ -22,7 +22,7 @@ public class PersonalTasteServiceImpl implements PersonalTasteService {
     UserDao userDao;
 
     @Override
-    public boolean submitPersonalTaste(PersonalTastePostForm personalTastePostForm, String uid) {
+    public boolean submitPersonalTaste(PersonalTasteForm personalTastePostForm, String uid) {
         if (userDao.selectById(uid) == null) {
             return false;
         }

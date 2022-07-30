@@ -7,9 +7,9 @@ import team.oldbask.apiException.EmBusinessError;
 import team.oldbask.apiException.TransactionException;
 import team.oldbask.dao.UserDao;
 import team.oldbask.domain.Code2Session;
-import team.oldbask.domain.User;
-import team.oldbask.domain.UserInfoForm;
-import team.oldbask.domain.UserPostForm;
+import team.oldbask.domain.model.User;
+import team.oldbask.domain.form.UserInfoForm;
+import team.oldbask.domain.form.UserForm;
 import team.oldbask.server.UserService;
 import team.oldbask.server.WechatService;
 
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer registerByWechat(@NotNull UserPostForm userPostForm) throws TransactionException {
+    public Integer registerByWechat(@NotNull UserForm userPostForm) throws TransactionException {
         Code2Session session = wechatService.code2Session(userPostForm.getCode());
         if (session.getErrCode() != null) {
             throw new TransactionException(EmBusinessError.OPENID_ERROR);

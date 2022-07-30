@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
-import team.oldbask.domain.form.PostForm;
-import team.oldbask.server.PostService;
+import team.oldbask.domain.form.CommentForm;
+import team.oldbask.server.CommentService;
 import team.oldbask.util.RespJson;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,21 +19,21 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
-@RequestMapping("/post")
-public class PostController {
+@RequestMapping("/comment")
+public class CommentController {
 
     @Autowired
-    private PostService postService;
+    private CommentService commentService;
 
     @ResponseBody
     @PostMapping
-    public RespJson submitPost(@RequestBody PostForm postForm, @NotNull HttpServletRequest request) {
+    public RespJson submitComment(@RequestBody CommentForm commentForm, @NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
-        if(postService.submitPost(postForm, uid)) {
-            log.info("submitPost-200-OK");
-            return new RespJson(200,"OK");
+        if(commentService.submitComment(commentForm, uid)) {
+            log.info("submitComment-200-OK");
+            return new RespJson(200, "OK");
         } else {
-            log.info("submitPost-" + EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode()
+            log.info("submitComment-" + EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode()
                     + "-" + EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorMsg());
             return new RespJson(EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode(),
                     EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorMsg());
@@ -42,8 +42,8 @@ public class PostController {
 
     @ResponseBody
     @GetMapping
-    public RespJson getPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
-        log.info("getPost-200-OK");
-        return new RespJson(200, "OK", postService.getPost(pageNum, size));
+    public RespJson getComment(@RequestParam Integer pageNum, @RequestParam Integer size, @RequestParam Integer postId) {
+        log.info("getComment-200-OK");
+        return new RespJson(200, "OK", commentService.getComment(postId, pageNum, size));
     }
 }

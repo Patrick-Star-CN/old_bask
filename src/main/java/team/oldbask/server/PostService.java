@@ -1,7 +1,7 @@
 package team.oldbask.server;
 
 import org.springframework.stereotype.Service;
-import team.oldbask.domain.PostForm;
+import team.oldbask.domain.form.PostForm;
 import team.oldbask.domain.PostPage;
 
 /**
@@ -16,15 +16,15 @@ public interface PostService {
      * 保存帖子
      * @param postForm 前端提交的帖子数据表单
      * @param uid uid
-     * @return 1: 保存成功; 2: 保存失败
+     * @return true: 保存成功; false: 保存失败
      */
     boolean submitPost(PostForm postForm, String uid);
 
     /**
      * 获取分页的帖子数据
      * @param pageNum 当前页码
-     * @param numPerPage 每页数量
+     * @param size 每页数量
      * @return Page对象
      */
-    PostPage getPost(Integer pageNum, Integer numPerPage);
+    PostPage getPost(Integer pageNum, Integer size);
 }

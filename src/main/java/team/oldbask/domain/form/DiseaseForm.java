@@ -1,4 +1,4 @@
-package team.oldbask.domain;
+package team.oldbask.domain.form;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
  */
 
 @Data
-public class DiseasePostForm {
+public class DiseaseForm {
     private Boolean gastritis;
     private Boolean asthma;
     private Boolean hypertension;

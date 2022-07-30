@@ -7,8 +7,9 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-public class PostWithUser {
+public class CommentWithUser {
     private Integer id;
+    private Integer postId;
     private Integer publisherId;
     private String publisherName;
     private String publisherType;
@@ -16,10 +17,10 @@ public class PostWithUser {
     private String content;
     private String createTime;
     private Integer likeNum;
-    private Integer commentNum;
 
-    public PostWithUser(Integer id, Integer publisherId, String publisherName, String publisherType, String publisherProfile, String content, String createTime, Integer likeNum, Integer commentNum) {
+    public CommentWithUser(Integer id, Integer postId, Integer publisherId, String publisherName, String publisherType, String publisherProfile, String content, String createTime, Integer likeNum) {
         this.id = id;
+        this.postId = postId;
         this.publisherId = publisherId;
         this.publisherName = publisherName;
         this.publisherType = publisherType;
@@ -27,6 +28,5 @@ public class PostWithUser {
         this.content = content;
         this.createTime = createTime;
         this.likeNum = likeNum;
-        this.commentNum = commentNum;
     }
 }

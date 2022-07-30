@@ -2,9 +2,9 @@ package team.oldbask.server;
 
 import org.springframework.stereotype.Service;
 import team.oldbask.apiException.TransactionException;
-import team.oldbask.domain.User;
-import team.oldbask.domain.UserInfoForm;
-import team.oldbask.domain.UserPostForm;
+import team.oldbask.domain.model.User;
+import team.oldbask.domain.form.UserInfoForm;
+import team.oldbask.domain.form.UserForm;
 
 /**
  * @author Patrick_Star
@@ -27,7 +27,7 @@ public interface UserService {
      * @return uid: 注册成功; null: 用户已存在
      * @throws TransactionException openid错误
      */
-    Integer registerByWechat(UserPostForm userPostForm) throws TransactionException;
+    Integer registerByWechat(UserForm userPostForm) throws TransactionException;
 
     /**
      * 通过uid获取用户信息

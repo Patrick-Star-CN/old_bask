@@ -1,4 +1,4 @@
-package team.oldbask.domain;
+package team.oldbask.domain.model;
 
 import lombok.Data;
 

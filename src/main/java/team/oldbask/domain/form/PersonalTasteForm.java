@@ -1,4 +1,4 @@
-package team.oldbask.domain;
+package team.oldbask.domain.form;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-public class PersonalTastePostForm {
+public class PersonalTasteForm {
     private Boolean sour;
     private Boolean sweet;
     private Boolean bitterness;

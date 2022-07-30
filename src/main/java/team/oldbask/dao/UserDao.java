@@ -3,7 +3,7 @@ package team.oldbask.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import team.oldbask.domain.User;
+import team.oldbask.domain.model.User;
 
 /**
  * @author Patrick_Star

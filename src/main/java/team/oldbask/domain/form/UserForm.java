@@ -1,4 +1,4 @@
-package team.oldbask.domain;
+package team.oldbask.domain.form;
 
 import lombok.Data;
 
@@ -6,11 +6,10 @@ import lombok.Data;
  * @author Patrick_Star
  * @version 1.0
  */
+
 @Data
-public class UserInfoForm {
+public class UserForm {
     private String username;
-    private String phoneNum;
-    private String sex;
-    private Integer age;
+    private String code;
     private String profile;
 }

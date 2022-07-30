@@ -1,10 +1,8 @@
 package team.oldbask.server;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.oldbask.dao.HealthDao;
-import team.oldbask.domain.Health;
-import team.oldbask.domain.HealthPostForm;
+import team.oldbask.domain.model.Health;
+import team.oldbask.domain.form.HealthForm;
 
 /**
  * @author Patrick_Star
@@ -19,7 +17,7 @@ public interface HealthService {
      * @param uid 用户id
      * @return true: 保存成功; false: 保存失败
      */
-    boolean submitHealth(HealthPostForm healthPostForm, String uid);
+    boolean submitHealth(HealthForm healthPostForm, String uid);
 
     /**
      * 通过uid来获取数据
