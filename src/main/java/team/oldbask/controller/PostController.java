@@ -42,8 +42,15 @@ public class PostController {
 
     @ResponseBody
     @GetMapping
-    public RespJson getPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
-        log.info("getPost-200-OK");
-        return new RespJson(200, "OK", postService.getPost(pageNum, size));
+    public RespJson getOtherPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
+        log.info("getOtherPost-200-OK");
+        return new RespJson(200, "OK", postService.getOtherPost(pageNum, size));
+    }
+
+    @ResponseBody
+    @GetMapping("/expert")
+    public RespJson getExpertPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
+        log.info("getExpertPost-200-OK");
+        return new RespJson(200, "OK", postService.getExpertPost(pageNum, size));
     }
 }

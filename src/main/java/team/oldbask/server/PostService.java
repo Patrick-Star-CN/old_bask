@@ -1,8 +1,8 @@
 package team.oldbask.server;
 
 import org.springframework.stereotype.Service;
-import team.oldbask.domain.form.PostForm;
 import team.oldbask.domain.PostPage;
+import team.oldbask.domain.form.PostForm;
 
 /**
  * @author Patrick_Star
@@ -21,10 +21,18 @@ public interface PostService {
     boolean submitPost(PostForm postForm, String uid);
 
     /**
-     * 获取分页的帖子数据
+     * 获取其他人发布的分页化后的帖子数据
      * @param pageNum 当前页码
      * @param size 每页数量
      * @return Page对象
      */
-    PostPage getPost(Integer pageNum, Integer size);
+    PostPage getOtherPost(Integer pageNum, Integer size);
+
+    /**
+     * 获取专家发布的分页化后的帖子数据
+     * @param pageNum 当前页码
+     * @param size 每页数量
+     * @return Page对象
+     */
+    PostPage getExpertPost(Integer pageNum, Integer size);
 }
