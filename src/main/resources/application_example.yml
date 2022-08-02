@@ -27,3 +27,11 @@ mybatis-plus:
 wechat:
   appid:
   secret:
+logging:
+  file:
+    name: server.log
+    max-size: 16KB
+    clean-history-on-start: true
+    max-history: 7
+  pattern:
+    rolling-file-name: server.%d{yyyy-MM-dd}.%i.log

@@ -36,21 +36,22 @@ public class PostServiceImpl implements PostService {
         return postDao.insert(new Post(
                 Integer.parseInt(uid),
                 postForm.getContent(),
-                userDao.selectById(uid).getType() == User.UserType.EXPERT ? Post.PostType.EXPERT : Post.PostType.OTHER
+                userDao.selectById(uid).getType() == User.UserType.EXPERT ?
+                        "EXPERT" : "OTHER"
         )) == 1;
     }
 
     @Override
     public PostPage getOtherPost(Integer pageNum, Integer size) {
-        return getPost(pageNum, size, Post.PostType.OTHER);
+        return getPost(pageNum, size, "OTHER");
     }
 
     @Override
     public PostPage getExpertPost(Integer pageNum, Integer size) {
-        return getPost(pageNum, size, Post.PostType.EXPERT);
+        return getPost(pageNum, size, "EXPERT");
     }
 
-    private PostPage getPost(Integer pageNum, Integer size, Post.PostType type) {
+    private PostPage getPost(Integer pageNum, Integer size, String type) {
         IPage<Post> page = new Page<>(pageNum, size);
         QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("type", type);

@@ -33,8 +33,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public boolean submitComment(CommentForm commentForm, String uid) {
         return commentDao.insert(new Comment(
-                Integer.parseInt(uid),
                 commentForm.getPostId(),
+                Integer.parseInt(uid),
                 commentForm.getContent()
         )) == 1;
     }

@@ -10,26 +10,15 @@ import java.sql.Timestamp;
 @Data
 public class Post {
 
-    public enum PostType {
-        /**
-         * 普通帖
-         */
-        OTHER,
-        /**
-         * 专家帖
-         */
-        EXPERT;
-    }
-
     private Integer id;
     private Integer publisherId;
     private String content;
     private Timestamp createTime;
     private Integer likeNum;
     private Integer commentNum;
-    private PostType type;
+    private String type;
 
-    public Post(Integer publisher, String content, PostType type) {
+    public Post(Integer publisher, String content, String type) {
         this.publisherId = publisher;
         this.content = content;
         this.createTime = new Timestamp(System.currentTimeMillis() + 28800000);
