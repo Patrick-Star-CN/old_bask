@@ -37,18 +37,18 @@ public class PostServiceImpl implements PostService {
                 Integer.parseInt(uid),
                 postForm.getContent(),
                 userDao.selectById(uid).getType() == User.UserType.EXPERT ?
-                        "EXPERT" : "OTHER"
+                        Post.PostType.EXPERT.toString() : Post.PostType.OTHER.toString()
         )) == 1;
     }
 
     @Override
     public PostPage getOtherPost(Integer pageNum, Integer size) {
-        return getPost(pageNum, size, "OTHER");
+        return getPost(pageNum, size, Post.PostType.OTHER.toString());
     }
 
     @Override
     public PostPage getExpertPost(Integer pageNum, Integer size) {
-        return getPost(pageNum, size, "EXPERT");
+        return getPost(pageNum, size, Post.PostType.EXPERT.toString());
     }
 
     private PostPage getPost(Integer pageNum, Integer size, String type) {

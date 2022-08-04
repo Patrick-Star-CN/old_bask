@@ -1,6 +1,7 @@
 package team.oldbask.domain.model;
 
 import lombok.Data;
+
 import java.sql.Timestamp;
 
 /**
@@ -25,5 +26,16 @@ public class Post {
         this.likeNum = 0;
         this.commentNum = 0;
         this.type = type;
+    }
+
+    public enum PostType {
+        /**
+         * 专家贴
+         */
+        EXPERT,
+        /**
+         * 其他贴
+         */
+        OTHER
     }
 }
