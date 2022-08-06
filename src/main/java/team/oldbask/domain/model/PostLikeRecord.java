@@ -12,4 +12,17 @@ public class PostLikeRecord {
     private Integer postId;
     private Integer uid;
     private Boolean isCancel;
+
+    public PostLikeRecord(Integer postId, Integer uid) {
+        this.postId = postId;
+        this.uid = uid;
+        this.isCancel = false;
+    }
+
+    public PostLikeRecord(Integer id, Integer postId, Integer uid, Boolean isCancel) {
+        this.id = id;
+        this.postId = postId;
+        this.uid = uid;
+        this.isCancel = isCancel;
+    }
 }

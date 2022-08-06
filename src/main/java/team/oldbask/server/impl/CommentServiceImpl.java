@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService {
     private UserDao userDao;
 
     @Override
-    public boolean submitComment(CommentForm commentForm, String uid) {
+    public Boolean submitComment(CommentForm commentForm, String uid) {
         return commentDao.insert(new Comment(
                 commentForm.getPostId(),
                 Integer.parseInt(uid),

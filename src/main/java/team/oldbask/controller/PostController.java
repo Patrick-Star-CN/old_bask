@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
 import team.oldbask.domain.form.PostForm;
+import team.oldbask.server.PostLikeRecordServer;
 import team.oldbask.server.PostService;
 import team.oldbask.util.RespJson;
 
@@ -25,6 +26,9 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private PostLikeRecordServer postLikeRecordServer;
+
     @ResponseBody
     @PostMapping
     public RespJson submitPost(@RequestBody PostForm postForm, @NotNull HttpServletRequest request) {
@@ -42,15 +46,31 @@ public class PostController {
 
     @ResponseBody
     @GetMapping
-    public RespJson getOtherPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
+    public RespJson getOtherPost(@RequestParam Integer pageNum, @RequestParam Integer size, @NotNull HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
         log.info("getOtherPost-200-OK");
-        return new RespJson(200, "OK", postService.getOtherPost(pageNum, size));
+        return new RespJson(200, "OK", postService.getOtherPost(pageNum, size, Integer.parseInt(uid)));
     }
 
     @ResponseBody
     @GetMapping("/expert")
-    public RespJson getExpertPost(@RequestParam Integer pageNum, @RequestParam Integer size) {
+    public RespJson getExpertPost(@RequestParam Integer pageNum, @RequestParam Integer size, @NotNull HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
         log.info("getExpertPost-200-OK");
-        return new RespJson(200, "OK", postService.getExpertPost(pageNum, size));
+        return new RespJson(200, "OK", postService.getExpertPost(pageNum, size, Integer.parseInt(uid)));
+    }
+
+    @ResponseBody
+    @GetMapping("/like")
+    public RespJson likePost(@RequestParam Integer postId, @NotNull HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
+        if(postLikeRecordServer.like(postId, Integer.parseInt(uid))) {
+            log.info("likePost-200-OK");
+            return new RespJson(200,"OK");
+        }
+        log.info("likePost-" + EmBusinessError.PARAMETER_ERROR.getErrorCode()
+                + "-" + EmBusinessError.PARAMETER_ERROR.getErrorMsg());
+        return new RespJson(EmBusinessError.PARAMETER_ERROR.getErrorCode(),
+                EmBusinessError.PARAMETER_ERROR.getErrorMsg());
     }
 }

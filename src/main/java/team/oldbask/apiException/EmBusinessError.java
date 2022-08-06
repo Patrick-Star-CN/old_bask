@@ -41,6 +41,10 @@ public enum EmBusinessError implements CommonError {
      * openId异常
      */
     OPENID_ERROR(30002, "openId异常"),
+    /**
+     * 参数异常
+     */
+    PARAMETER_ERROR(30001, "参数异常"),
 
     /**
      * 未知错误

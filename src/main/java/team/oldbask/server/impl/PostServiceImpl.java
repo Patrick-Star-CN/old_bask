@@ -13,6 +13,7 @@ import team.oldbask.domain.PostWithUser;
 import team.oldbask.domain.form.PostForm;
 import team.oldbask.domain.model.Post;
 import team.oldbask.domain.model.User;
+import team.oldbask.server.PostLikeRecordServer;
 import team.oldbask.server.PostService;
 
 import java.util.ArrayList;
@@ -31,8 +32,11 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private PostLikeRecordServer postLikeRecordServer;
+
     @Override
-    public boolean submitPost(@NotNull PostForm postForm, String uid) {
+    public Boolean submitPost(@NotNull PostForm postForm, String uid) {
         return postDao.insert(new Post(
                 Integer.parseInt(uid),
                 postForm.getContent(),
@@ -42,16 +46,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostPage getOtherPost(Integer pageNum, Integer size) {
-        return getPost(pageNum, size, Post.PostType.OTHER.toString());
+    public PostPage getOtherPost(Integer pageNum, Integer size, Integer uid) {
+        return getPost(pageNum, size, Post.PostType.OTHER.toString(), uid);
     }
 
     @Override
-    public PostPage getExpertPost(Integer pageNum, Integer size) {
-        return getPost(pageNum, size, Post.PostType.EXPERT.toString());
+    public PostPage getExpertPost(Integer pageNum, Integer size, Integer uid) {
+        return getPost(pageNum, size, Post.PostType.EXPERT.toString(), uid);
     }
 
-    private PostPage getPost(Integer pageNum, Integer size, String type) {
+    private PostPage getPost(Integer pageNum, Integer size, String type, Integer uid) {
         IPage<Post> page = new Page<>(pageNum, size);
         QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("type", type);
@@ -72,7 +76,8 @@ public class PostServiceImpl implements PostService {
                     post.getContent(),
                     post.getCreateTime().toString(),
                     post.getLikeNum(),
-                    post.getCommentNum()
+                    post.getCommentNum(),
+                    postLikeRecordServer.isLike(post.getId(), uid)
             ));
         }
         postPage.setData(list);

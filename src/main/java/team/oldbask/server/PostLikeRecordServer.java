@@ -15,7 +15,7 @@ public interface PostLikeRecordServer {
      * @param uid 用户id
      * @return true: 修改成功; false: 修改失败
      */
-    Boolean like(String postId, String uid);
+    Boolean like(Integer postId, Integer uid);
 
     /**
      * 是否点赞
@@ -23,5 +23,5 @@ public interface PostLikeRecordServer {
      * @param uid 用户id
      * @return true: 已点赞; false: 未点赞
      */
-    Boolean isLike(String postId, String uid);
+    Boolean isLike(Integer postId, Integer uid);
 }

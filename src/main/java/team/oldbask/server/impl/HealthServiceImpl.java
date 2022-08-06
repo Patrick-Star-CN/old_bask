@@ -22,7 +22,7 @@ public class HealthServiceImpl implements HealthService {
     private HealthDao healthDao;
 
     @Override
-    public boolean submitHealth(HealthForm healthPostForm, String uid) {
+    public Boolean submitHealth(HealthForm healthPostForm, String uid) {
         if (userDao.selectById(uid) == null) {
             return false;
         }

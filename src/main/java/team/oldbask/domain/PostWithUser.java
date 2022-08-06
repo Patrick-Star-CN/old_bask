@@ -17,8 +17,9 @@ public class PostWithUser {
     private String createTime;
     private Integer likeNum;
     private Integer commentNum;
+    private Boolean isLike;
 
-    public PostWithUser(Integer id, Integer publisherId, String publisherName, String publisherType, String publisherProfile, String content, String createTime, Integer likeNum, Integer commentNum) {
+    public PostWithUser(Integer id, Integer publisherId, String publisherName, String publisherType, String publisherProfile, String content, String createTime, Integer likeNum, Integer commentNum, Boolean isLike) {
         this.id = id;
         this.publisherId = publisherId;
         this.publisherName = publisherName;
@@ -28,5 +29,6 @@ public class PostWithUser {
         this.createTime = createTime;
         this.likeNum = likeNum;
         this.commentNum = commentNum;
+        this.isLike = isLike;
     }
 }

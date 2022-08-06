@@ -17,7 +17,7 @@ public interface HealthService {
      * @param uid 用户id
      * @return true: 保存成功; false: 保存失败
      */
-    boolean submitHealth(HealthForm healthPostForm, String uid);
+    Boolean submitHealth(HealthForm healthPostForm, String uid);
 
     /**
      * 通过uid来获取数据

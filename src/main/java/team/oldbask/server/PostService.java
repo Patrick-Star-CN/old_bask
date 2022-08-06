@@ -18,7 +18,7 @@ public interface PostService {
      * @param uid uid
      * @return true: 保存成功; false: 保存失败
      */
-    boolean submitPost(PostForm postForm, String uid);
+    Boolean submitPost(PostForm postForm, String uid);
 
     /**
      * 获取其他人发布的分页化后的帖子数据
@@ -26,7 +26,7 @@ public interface PostService {
      * @param size 每页数量
      * @return Page对象
      */
-    PostPage getOtherPost(Integer pageNum, Integer size);
+    PostPage getOtherPost(Integer pageNum, Integer size, Integer uid);
 
     /**
      * 获取专家发布的分页化后的帖子数据
@@ -34,5 +34,5 @@ public interface PostService {
      * @param size 每页数量
      * @return Page对象
      */
-    PostPage getExpertPost(Integer pageNum, Integer size);
+    PostPage getExpertPost(Integer pageNum, Integer size, Integer uid);
 }

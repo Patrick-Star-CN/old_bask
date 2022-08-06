@@ -17,7 +17,7 @@ public interface PersonalTasteService {
      * @param uid uid
      * @return true: 保存成功; false: 保存失败
      */
-    boolean submitPersonalTaste(PersonalTasteForm personalTastePostForm, String uid);
+    Boolean submitPersonalTaste(PersonalTasteForm personalTastePostForm, String uid);
 
     /**
      * 通过uid获取该用户个人喜好信息

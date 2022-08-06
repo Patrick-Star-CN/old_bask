@@ -2,6 +2,7 @@ package team.oldbask.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import team.oldbask.domain.model.PostLikeRecord;
 
@@ -21,5 +22,5 @@ public interface PostLikeRecordDao extends BaseMapper<PostLikeRecord> {
     @Select("SELECT * " +
             "FROM tbl_post_like_record " +
             "WHERE uid = #{uid} AND post_id = #{postId}")
-    PostLikeRecord selectByUidAndPostId(Integer uid, Integer postId);
+    PostLikeRecord selectByUidAndPostId(@Param("uid") Integer uid, @Param("postId") Integer postId);
 }

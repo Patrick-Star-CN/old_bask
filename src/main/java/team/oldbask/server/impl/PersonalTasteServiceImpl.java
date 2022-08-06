@@ -22,7 +22,7 @@ public class PersonalTasteServiceImpl implements PersonalTasteService {
     UserDao userDao;
 
     @Override
-    public boolean submitPersonalTaste(PersonalTasteForm personalTastePostForm, String uid) {
+    public Boolean submitPersonalTaste(PersonalTasteForm personalTastePostForm, String uid) {
         if (userDao.selectById(uid) == null) {
             return false;
         }

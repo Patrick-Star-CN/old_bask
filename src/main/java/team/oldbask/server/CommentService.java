@@ -17,7 +17,7 @@ public interface CommentService {
      * @param uid
      * @return true: 保存成功; false: 保存失败
      */
-    boolean submitComment(CommentForm commentForm, String uid);
+    Boolean submitComment(CommentForm commentForm, String uid);
 
     /**
      * 获取分页的评论数据

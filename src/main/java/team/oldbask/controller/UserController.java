@@ -171,4 +171,14 @@ public class UserController {
         log.info("submitInfo-200-OK");
         return new RespJson(200, "OK");
     }
+
+    @ResponseBody
+    @GetMapping("/login")
+    public RespJson login(@RequestParam String uid, @NotNull HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("id", uid);
+        redisTemplate.opsForValue().set("id:" + uid, session.getId());
+        log.info("login-200-OK");
+        return new RespJson(200, "OK");
+    }
 }
