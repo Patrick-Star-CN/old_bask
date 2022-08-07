@@ -12,6 +12,7 @@ import team.oldbask.domain.CommentWithUser;
 import team.oldbask.domain.form.CommentForm;
 import team.oldbask.domain.model.Comment;
 import team.oldbask.domain.model.User;
+import team.oldbask.server.CommentLikeRecordService;
 import team.oldbask.server.CommentService;
 
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private CommentLikeRecordService commentLikeRecordService;
+
     @Override
     public Boolean submitComment(CommentForm commentForm, String uid) {
         return commentDao.insert(new Comment(
@@ -40,7 +44,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentPage getComment(Integer postId, Integer pageNum, Integer size) {
+    public CommentPage getComment(Integer postId, Integer pageNum, Integer size, Integer uid) {
         IPage<Comment> page = new Page<>(pageNum, size);
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(postId != null, Comment::getPostId, postId);
@@ -61,7 +65,8 @@ public class CommentServiceImpl implements CommentService {
                     publisher.getProfile(),
                     comment.getContent(),
                     comment.getCreateTime().toString(),
-                    comment.getLikeNum()
+                    comment.getLikeNum(),
+                    commentLikeRecordService.isLike(comment.getId(), uid)
             ));
         }
         commentPage.setData(list);

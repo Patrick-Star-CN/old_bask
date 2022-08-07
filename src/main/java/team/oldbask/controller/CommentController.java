@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
 import team.oldbask.domain.form.CommentForm;
+import team.oldbask.server.CommentLikeRecordService;
 import team.oldbask.server.CommentService;
 import team.oldbask.util.RespJson;
 
@@ -25,6 +26,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private CommentLikeRecordService commentLikeRecordService;
+
     @ResponseBody
     @PostMapping
     public RespJson submitComment(@RequestBody CommentForm commentForm, @NotNull HttpServletRequest request) {
@@ -42,8 +46,23 @@ public class CommentController {
 
     @ResponseBody
     @GetMapping
-    public RespJson getComment(@RequestParam Integer pageNum, @RequestParam Integer size, @RequestParam Integer postId) {
+    public RespJson getComment(@RequestParam Integer pageNum, @RequestParam Integer size, @RequestParam Integer postId, @NotNull HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
         log.info("getComment-200-OK");
-        return new RespJson(200, "OK", commentService.getComment(postId, pageNum, size));
+        return new RespJson(200, "OK", commentService.getComment(postId, pageNum, size, Integer.parseInt(uid)));
+    }
+
+    @ResponseBody
+    @GetMapping("/like")
+    public RespJson likeComment(@RequestParam Integer commentId, @NotNull HttpServletRequest request) {
+        String uid = (String)request.getSession().getAttribute("id");
+        if(commentLikeRecordService.like(commentId, Integer.parseInt(uid))) {
+            log.info("likeComment-200-OK");
+            return new RespJson(200,"OK");
+        }
+        log.info("likeComment-" + EmBusinessError.PARAMETER_ERROR.getErrorCode()
+                + "-" + EmBusinessError.PARAMETER_ERROR.getErrorMsg());
+        return new RespJson(EmBusinessError.PARAMETER_ERROR.getErrorCode(),
+                EmBusinessError.PARAMETER_ERROR.getErrorMsg());
     }
 }

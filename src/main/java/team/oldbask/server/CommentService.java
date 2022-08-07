@@ -24,7 +24,8 @@ public interface CommentService {
      * @param postId 帖子id
      * @param pageNum 当前页码
      * @param size 每页数量
+     * @param uid 用户id
      * @return Page对象
      */
-    CommentPage getComment(Integer postId, Integer pageNum, Integer size);
+    CommentPage getComment(Integer postId, Integer pageNum, Integer size, Integer uid);
 }

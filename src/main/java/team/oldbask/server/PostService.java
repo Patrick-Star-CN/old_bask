@@ -24,6 +24,7 @@ public interface PostService {
      * 获取其他人发布的分页化后的帖子数据
      * @param pageNum 当前页码
      * @param size 每页数量
+     * @param uid 用户id
      * @return Page对象
      */
     PostPage getOtherPost(Integer pageNum, Integer size, Integer uid);
@@ -32,6 +33,7 @@ public interface PostService {
      * 获取专家发布的分页化后的帖子数据
      * @param pageNum 当前页码
      * @param size 每页数量
+     * @param uid 用户id
      * @return Page对象
      */
     PostPage getExpertPost(Integer pageNum, Integer size, Integer uid);

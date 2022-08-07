@@ -17,8 +17,9 @@ public class CommentWithUser {
     private String content;
     private String createTime;
     private Integer likeNum;
+    private Boolean isLike;
 
-    public CommentWithUser(Integer id, Integer postId, Integer publisherId, String publisherName, String publisherType, String publisherProfile, String content, String createTime, Integer likeNum) {
+    public CommentWithUser(Integer id, Integer postId, Integer publisherId, String publisherName, String publisherType, String publisherProfile, String content, String createTime, Integer likeNum, Boolean isLike) {
         this.id = id;
         this.postId = postId;
         this.publisherId = publisherId;
@@ -28,5 +29,6 @@ public class CommentWithUser {
         this.content = content;
         this.createTime = createTime;
         this.likeNum = likeNum;
+        this.isLike = isLike;
     }
 }
