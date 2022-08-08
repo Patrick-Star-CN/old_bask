@@ -46,16 +46,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostPage getOtherPost(Integer pageNum, Integer size, Integer uid) {
-        return getPost(pageNum, size, Post.PostType.OTHER.toString(), uid);
-    }
-
-    @Override
-    public PostPage getExpertPost(Integer pageNum, Integer size, Integer uid) {
-        return getPost(pageNum, size, Post.PostType.EXPERT.toString(), uid);
-    }
-
-    private PostPage getPost(Integer pageNum, Integer size, String type, Integer uid) {
+    public PostPage getPost(Integer pageNum, Integer size, String type, Integer uid) {
         IPage<Post> page = new Page<>(pageNum, size);
         QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("type", type);

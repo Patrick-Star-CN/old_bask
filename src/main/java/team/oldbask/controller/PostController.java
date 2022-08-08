@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
 import team.oldbask.domain.form.PostForm;
+import team.oldbask.domain.model.Post;
 import team.oldbask.server.PostLikeRecordServer;
 import team.oldbask.server.PostService;
 import team.oldbask.util.RespJson;
@@ -49,7 +50,7 @@ public class PostController {
     public RespJson getOtherPost(@RequestParam Integer pageNum, @RequestParam Integer size, @NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         log.info("getOtherPost-200-OK");
-        return new RespJson(200, "OK", postService.getOtherPost(pageNum, size, Integer.parseInt(uid)));
+        return new RespJson(200, "OK", postService.getPost(pageNum, size, Post.PostType.OTHER.toString(), Integer.parseInt(uid)));
     }
 
     @ResponseBody
@@ -57,7 +58,7 @@ public class PostController {
     public RespJson getExpertPost(@RequestParam Integer pageNum, @RequestParam Integer size, @NotNull HttpServletRequest request) {
         String uid = (String)request.getSession().getAttribute("id");
         log.info("getExpertPost-200-OK");
-        return new RespJson(200, "OK", postService.getExpertPost(pageNum, size, Integer.parseInt(uid)));
+        return new RespJson(200, "OK", postService.getPost(pageNum, size, Post.PostType.EXPERT.toString(), Integer.parseInt(uid)));
     }
 
     @ResponseBody
