@@ -5,6 +5,7 @@ import team.oldbask.domain.PostPage;
 import team.oldbask.domain.form.PostForm;
 
 /**
+ * 帖子功能业务层接口
  * @author Patrick_Star
  * @version 1.0
  */

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 帖子功能业务层接口实现类
  * @author Patrick_Star
  * @version 1.0
  */

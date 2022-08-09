@@ -15,6 +15,7 @@ import team.oldbask.util.RespJson;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 帖子功能显示层控制器
  * @author Patrick_Star
  * @version 1.0
  */
