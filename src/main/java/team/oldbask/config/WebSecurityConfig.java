@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import team.oldbask.handle.RedisSessionInterceptor;
 
 /**
+ * session身份验证拦截器
  * @author Patrick_Star
  * @version 1.0
  */

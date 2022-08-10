@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 用户功能显示层控制器
  * @author Patrick_Star
  * @version 1.0
  */
