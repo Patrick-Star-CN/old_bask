@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import team.oldbask.domain.model.PostLikeRecord;
 
 /**
+ * 帖子点赞数据层接口
  * @author Patrick_Star
  * @version 1.0
  */

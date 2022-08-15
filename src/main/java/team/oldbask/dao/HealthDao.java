@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Update;
 import team.oldbask.domain.model.Health;
 
 /**
+ * 用户健康情况数据层接口
  * @author Patrick_Star
  * @version 1.0
  */

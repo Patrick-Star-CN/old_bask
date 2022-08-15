@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import team.oldbask.domain.model.CommentLikeRecord;
 
 /**
+ * 评论点赞功能数据层接口
  * @author Patrick_Star
  * @version 1.0
  */
