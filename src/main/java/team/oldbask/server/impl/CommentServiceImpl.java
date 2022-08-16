@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.oldbask.dao.CommentDao;
+import team.oldbask.dao.PostDao;
 import team.oldbask.dao.UserDao;
 import team.oldbask.domain.CommentPage;
 import team.oldbask.domain.CommentWithUser;
 import team.oldbask.domain.form.CommentForm;
 import team.oldbask.domain.model.Comment;
+import team.oldbask.domain.model.Post;
 import team.oldbask.domain.model.User;
 import team.oldbask.server.CommentLikeRecordService;
 import team.oldbask.server.CommentService;
@@ -34,8 +36,21 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentLikeRecordService commentLikeRecordService;
 
+    @Autowired
+    private PostDao postDao;
+
     @Override
     public Boolean submitComment(CommentForm commentForm, String uid) {
+        Post post = postDao.selectById(commentForm.getPostId());
+        postDao.updateById(new Post(
+                post.getId(),
+                post.getPublisherId(),
+                post.getContent(),
+                post.getCreateTime(),
+                post.getLikeNum(),
+                post.getCommentNum() + 1,
+                post.getType()
+        ));
         return commentDao.insert(new Comment(
                 commentForm.getPostId(),
                 Integer.parseInt(uid),

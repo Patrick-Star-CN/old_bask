@@ -22,7 +22,16 @@ public class Comment {
         this.postId = postId;
         this.publisherId = publisherId;
         this.content = content;
-        this.createTime = new Timestamp(System.currentTimeMillis() + 28800000);
+        this.createTime = new Timestamp(System.currentTimeMillis());
         this.likeNum = 0;
+    }
+
+    public Comment(Integer id, Integer postId, Integer publisherId, String content, Timestamp createTime, Integer likeNum) {
+        this.id = id;
+        this.postId = postId;
+        this.publisherId = publisherId;
+        this.content = content;
+        this.createTime = createTime;
+        this.likeNum = likeNum;
     }
 }
