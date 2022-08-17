@@ -3,6 +3,7 @@ package team.oldbask.domain.model;
 import lombok.Data;
 
 /**
+ * 用户实体类
  * @author Patrick_Star
  * @version 1.0
  */

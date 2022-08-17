@@ -5,6 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 /**
+ * 评论实体类
  * @author Patrick_Star
  * @version 1.0
  */

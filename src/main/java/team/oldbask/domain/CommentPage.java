@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
+ * 评论分页实体类
  * @author Patrick_Star
  * @version 1.0
  */

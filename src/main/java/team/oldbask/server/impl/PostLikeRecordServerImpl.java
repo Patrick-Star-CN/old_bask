@@ -9,6 +9,7 @@ import team.oldbask.domain.model.PostLikeRecord;
 import team.oldbask.server.PostLikeRecordServer;
 
 /**
+ * 帖子点赞记录业务层实践类
  * @author Patrick_Star
  * @version 1.0
  */

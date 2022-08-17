@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
+ * code兑换openid实体类
  * @author Patrick_Star
  * @version 1.0
  */

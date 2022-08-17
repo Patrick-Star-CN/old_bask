@@ -3,6 +3,7 @@ package team.oldbask.domain.model;
 import lombok.Data;
 
 /**
+ * 帖子点赞记录实体类
  * @author Patrick_Star
  * @version 1.0
  */

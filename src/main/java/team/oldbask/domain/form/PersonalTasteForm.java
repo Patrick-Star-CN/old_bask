@@ -3,6 +3,7 @@ package team.oldbask.domain.form;
 import lombok.Data;
 
 /**
+ * 用户口味喜好提交表单实体类
  * @author Patrick_Star
  * @version 1.0
  */
