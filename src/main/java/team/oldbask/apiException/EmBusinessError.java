@@ -32,6 +32,10 @@ public enum EmBusinessError implements CommonError {
      * 用户已注册
      */
     USER_EXIST(20002, "用户已注册"),
+    /**
+     * 用户权限不足
+     */
+    USER_PERMISSION_ERROR(20003, "用户权限不足"),
 
     /**
      * 配置出错

@@ -6,10 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team.oldbask.apiException.EmBusinessError;
+import team.oldbask.apiException.TransactionException;
 import team.oldbask.dao.PostDao;
 import team.oldbask.dao.UserDao;
 import team.oldbask.domain.PostPage;
 import team.oldbask.domain.PostWithUser;
+import team.oldbask.domain.form.PostEditForm;
 import team.oldbask.domain.form.PostForm;
 import team.oldbask.domain.model.Post;
 import team.oldbask.domain.model.User;
@@ -74,5 +77,33 @@ public class PostServiceImpl implements PostService {
         }
         postPage.setData(list);
         return postPage;
+    }
+
+    @Override
+    public Boolean editPost(PostEditForm postEditForm, Integer uid) throws TransactionException {
+        Post post = postDao.selectById(postEditForm.getPostId());
+        if(!post.getPublisherId().equals(uid)) {
+            throw new TransactionException(EmBusinessError.USER_PERMISSION_ERROR);
+        }
+
+        return postDao.updateById(new Post(
+                post.getId(),
+                post.getPublisherId(),
+                postEditForm.getContent(),
+                post.getCreateTime(),
+                post.getLikeNum(),
+                post.getCommentNum(),
+                post.getType()
+        )) == 1;
+    }
+
+    @Override
+    public Boolean deletePost(Integer postId, Integer uid) throws TransactionException {
+        Post post = postDao.selectById(postId);
+        if(!post.getPublisherId().equals(uid)) {
+            throw new TransactionException(EmBusinessError.USER_PERMISSION_ERROR);
+        }
+
+        return postDao.deleteById(postId) == 1;
     }
 }

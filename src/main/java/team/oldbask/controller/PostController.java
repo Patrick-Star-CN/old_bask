@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import team.oldbask.apiException.EmBusinessError;
+import team.oldbask.apiException.TransactionException;
+import team.oldbask.domain.form.PostEditForm;
 import team.oldbask.domain.form.PostForm;
 import team.oldbask.domain.model.Post;
 import team.oldbask.server.PostLikeRecordServer;
@@ -74,5 +76,33 @@ public class PostController {
                 + "-" + EmBusinessError.PARAMETER_ERROR.getErrorMsg());
         return new RespJson(EmBusinessError.PARAMETER_ERROR.getErrorCode(),
                 EmBusinessError.PARAMETER_ERROR.getErrorMsg());
+    }
+
+    @ResponseBody
+    @PostMapping("/edit")
+    public RespJson editPost(@RequestBody PostEditForm postEditForm, @NotNull HttpServletRequest request) throws TransactionException {
+        String uid = (String)request.getSession().getAttribute("id");
+        if(postService.editPost(postEditForm, Integer.parseInt(uid))) {
+            log.info("editPost-200-OK");
+            return new RespJson(200,"OK");
+        }
+        log.info("editPost-" + EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode()
+                + "-" + EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorMsg());
+        return new RespJson(EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode(),
+                EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorMsg());
+    }
+
+    @ResponseBody
+    @DeleteMapping
+    public RespJson deletePost(@RequestParam Integer postId, @NotNull HttpServletRequest request) throws TransactionException {
+        String uid = (String)request.getSession().getAttribute("id");
+        if(postService.deletePost(postId, Integer.parseInt(uid))) {
+            log.info("deletePost-200-OK");
+            return new RespJson(200,"OK");
+        }
+        log.info("deletePost-" + EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode()
+                + "-" + EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorMsg());
+        return new RespJson(EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorCode(),
+                EmBusinessError.DATABASE_CONNECTION_ERROR.getErrorMsg());
     }
 }

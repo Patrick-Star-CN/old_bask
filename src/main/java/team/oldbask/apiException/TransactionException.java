@@ -15,7 +15,7 @@ public class TransactionException extends Exception implements CommonError {
 
     /**
      * 直接接受EmBusinessError的传参用于构造业务异常
-     * @param CommonError EmBusinessError的一个具体异常
+     * @param commonError EmBusinessError的一个具体异常
      */
     public TransactionException(CommonError commonError) {
         super();
@@ -24,8 +24,8 @@ public class TransactionException extends Exception implements CommonError {
 
     /**
      * 接收自定义errMsg的方法构造业务异常
-     * @param CommonError 一个新的基础自定义API异常
-     * @param ErrMsg 异常消息
+     * @param commonError 一个新的基础自定义API异常
+     * @param errMsg 异常消息
      */
     public TransactionException(CommonError commonError, String errMsg) {
         super();

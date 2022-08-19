@@ -1,7 +1,9 @@
 package team.oldbask.server;
 
 import org.springframework.stereotype.Service;
+import team.oldbask.apiException.TransactionException;
 import team.oldbask.domain.PostPage;
+import team.oldbask.domain.form.PostEditForm;
 import team.oldbask.domain.form.PostForm;
 
 /**
@@ -30,4 +32,22 @@ public interface PostService {
      * @return Page对象
      */
     PostPage getPost(Integer pageNum, Integer size, String type, Integer uid);
+
+    /**
+     * 修改帖子内容
+     * @param postEditForm 修改后的帖子表单
+     * @param uid 用户id
+     * @return true: 保存成功; false: 保存失败
+     * @throws TransactionException 用户权限异常
+     */
+    Boolean editPost(PostEditForm postEditForm, Integer uid) throws TransactionException;
+
+    /**
+     * 删除制定帖子
+     * @param postId 帖子id
+     * @param uid 用户id
+     * @return true: 保存成功; false: 保存失败
+     * @throws TransactionException 用户权限异常
+     */
+    Boolean deletePost(Integer postId, Integer uid) throws TransactionException;
 }
