@@ -82,7 +82,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public Boolean editPost(PostEditForm postEditForm, Integer uid) throws TransactionException {
         Post post = postDao.selectById(postEditForm.getPostId());
-        if(!post.getPublisherId().equals(uid)) {
+        if(post == null) {
+            throw new TransactionException(EmBusinessError.POST_NOT_EXACT);
+        } else if(!post.getPublisherId().equals(uid)) {
             throw new TransactionException(EmBusinessError.USER_PERMISSION_ERROR);
         }
 
@@ -100,7 +102,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public Boolean deletePost(Integer postId, Integer uid) throws TransactionException {
         Post post = postDao.selectById(postId);
-        if(!post.getPublisherId().equals(uid)) {
+        if(post == null) {
+            throw new TransactionException(EmBusinessError.POST_NOT_EXACT);
+        } else if(!post.getPublisherId().equals(uid)) {
             throw new TransactionException(EmBusinessError.USER_PERMISSION_ERROR);
         }
 

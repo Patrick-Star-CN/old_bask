@@ -94,7 +94,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Boolean editComment(CommentEditForm commentEditForm, Integer uid) throws TransactionException {
         Comment comment = commentDao.selectById(commentEditForm.getCommentId());
-        if(!comment.getPublisherId().equals(uid)) {
+        if(comment == null) {
+            throw new TransactionException(EmBusinessError.COMMENT_NOT_EXACT);
+        } else if(!comment.getPublisherId().equals(uid)) {
             throw new TransactionException(EmBusinessError.USER_PERMISSION_ERROR);
         }
 
@@ -111,7 +113,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Boolean deleteComment(Integer commentId, Integer uid) throws TransactionException {
         Comment comment = commentDao.selectById(commentId);
-        if(!comment.getPublisherId().equals(uid)) {
+        if(comment == null) {
+            throw new TransactionException(EmBusinessError.COMMENT_NOT_EXACT);
+        } else if(!comment.getPublisherId().equals(uid)) {
             throw new TransactionException(EmBusinessError.USER_PERMISSION_ERROR);
         }
 

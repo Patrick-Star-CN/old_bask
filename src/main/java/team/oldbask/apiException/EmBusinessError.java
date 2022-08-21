@@ -48,7 +48,15 @@ public enum EmBusinessError implements CommonError {
     /**
      * 参数异常
      */
-    PARAMETER_ERROR(30001, "参数异常"),
+    PARAMETER_ERROR(30003, "参数异常"),
+    /**
+     * 帖子不存在
+     */
+    POST_NOT_EXACT(30004, "帖子不存在"),
+    /**
+     * 评论不存在
+     */
+    COMMENT_NOT_EXACT(30004, "评论不存在"),
 
     /**
      * 未知错误
@@ -59,7 +67,7 @@ public enum EmBusinessError implements CommonError {
     /**
      * 异常编码
      */
-    private int errCode;
+    private final int errCode;
     /**
      * 异常消息
      */
